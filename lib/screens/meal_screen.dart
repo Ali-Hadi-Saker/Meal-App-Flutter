@@ -9,6 +9,23 @@ class MealScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text(title)), body: ListView());
+    Widget content = Center(
+      child: Text(
+        'No meal exist in this category!!',
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          color: Theme.of(context).colorScheme.onSurface,
+          fontSize: 20,
+        ),
+      ),
+    );
+
+    if (meals.isNotEmpty) {
+      content = ListView.builder(
+        itemCount: meals.length,
+        itemBuilder: (ctx, index) => Text(meals[index].title),
+      );
+    }
+
+    return Scaffold(appBar: AppBar(title: Text(title)), body: content);
   }
 }
