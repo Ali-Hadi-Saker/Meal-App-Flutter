@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meal_app/data/dummy_data.dart';
 import 'package:meal_app/models/category.dart';
 import 'package:meal_app/screens/meal_screen.dart';
 
@@ -7,11 +8,19 @@ class CategoryGridItem extends StatelessWidget {
 
   final Category category;
 
-  void _onSelectCategory(BuildContext context) {
+  //context is not available in the constructor, so we need to pass it to the method
+  //this method is called when the user taps on the category item
+  void _onSelectCategory(BuildContext context, Category category) {
+    //filter the meals based on the selected category
+    final filterdMeals =
+        dummyMeals
+            .where((meal) => meal.categories.contains(category.id))
+            .toList();
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (ctx) => MealScreen(meals: [], title: 'Category title'),
+        builder:
+            (ctx) => MealScreen(meals: filterdMeals, title: category.title),
       ),
     );
   }
@@ -19,7 +28,7 @@ class CategoryGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _onSelectCategory(context),
+      onTap: () => _onSelectCategory(context, category),
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(16),
       child: Container(
