@@ -1,16 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:meal_app/models/meal.dart';
 
-class MealScreen extends StatefulWidget {
-  const MealScreen({super.key});
+class MealScreen extends StatelessWidget {
+  const MealScreen({super.key, required this.meals, required this.title});
 
-  @override
-  State<MealScreen> createState() => _MealScreenState();
-}
+  final String title;
+  final List<Meal> meals;
 
-class _MealScreenState extends State<MealScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(appBar: AppBar(title: Text(title)), body: ListView());
   }
 }
