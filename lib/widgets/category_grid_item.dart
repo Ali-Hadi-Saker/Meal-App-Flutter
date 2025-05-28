@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/data/dummy_data.dart';
 import 'package:meal_app/models/category.dart';
+import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/screens/meal_screen.dart';
 
 class CategoryGridItem extends StatelessWidget {
-  const CategoryGridItem({super.key, required this.category});
+  const CategoryGridItem({
+    super.key,
+    required this.category,
+    required this.toggleFavoriteMeal,
+  });
 
   final Category category;
+  final Function(Meal meal) toggleFavoriteMeal;
 
   //context is not available in the constructor, so we need to pass it to the method
   //this method is called when the user taps on the category item
@@ -20,7 +26,11 @@ class CategoryGridItem extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder:
-            (ctx) => MealScreen(meals: filterdMeals, title: category.title),
+            (ctx) => MealScreen(
+              meals: filterdMeals,
+              title: category.title,
+              toggleFavoriteMeal: toggleFavoriteMeal,
+            ),
       ),
     );
   }

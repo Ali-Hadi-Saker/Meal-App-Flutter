@@ -5,14 +5,26 @@ import 'package:meal_app/widgets/meal_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({super.key, required this.meal});
+  const MealItem({
+    super.key,
+    required this.meal,
+    required this.toggleFavoriteMeal,
+  });
+
+  final Function(Meal meal) toggleFavoriteMeal;
 
   final Meal meal;
 
   void _onSelectMeal(BuildContext context) {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (ctx) => DetailMealScreen(meal: meal)));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder:
+            (ctx) => DetailMealScreen(
+              meal: meal,
+              toggleFavoriteMeal: toggleFavoriteMeal,
+            ),
+      ),
+    );
   }
 
   @override

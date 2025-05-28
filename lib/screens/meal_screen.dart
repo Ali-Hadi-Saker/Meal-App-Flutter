@@ -3,10 +3,16 @@ import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/widgets/meal_item.dart';
 
 class MealScreen extends StatelessWidget {
-  const MealScreen({super.key, required this.meals, this.title});
+  const MealScreen({
+    super.key,
+    required this.meals,
+    this.title,
+    required this.toggleFavoriteMeal,
+  });
 
   final String? title;
   final List<Meal> meals;
+  final Function(Meal meal) toggleFavoriteMeal;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +38,10 @@ class MealScreen extends StatelessWidget {
             //     fontSize: 20,
             //   ),
             // ),
-            MealItem(meal: meals[index]),
+            MealItem(
+              meal: meals[index],
+              toggleFavoriteMeal: toggleFavoriteMeal,
+            ),
       );
     }
 
