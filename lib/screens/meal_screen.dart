@@ -3,9 +3,9 @@ import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/widgets/meal_item.dart';
 
 class MealScreen extends StatelessWidget {
-  const MealScreen({super.key, required this.meals, required this.title});
+  const MealScreen({super.key, required this.meals, this.title});
 
-  final String title;
+  final String? title;
   final List<Meal> meals;
 
   @override
@@ -36,6 +36,10 @@ class MealScreen extends StatelessWidget {
       );
     }
 
-    return Scaffold(appBar: AppBar(title: Text(title)), body: content);
+    if (title == null) {
+      return content;
+    }
+
+    return Scaffold(appBar: AppBar(title: Text(title!)), body: content);
   }
 }
