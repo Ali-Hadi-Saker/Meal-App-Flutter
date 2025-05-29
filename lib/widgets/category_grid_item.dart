@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/data/dummy_data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_app/models/category.dart';
 import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/providers/meal_provider.dart';
 import 'package:meal_app/screens/meal_screen.dart';
 
-class CategoryGridItem extends StatelessWidget {
+class CategoryGridItem extends ConsumerWidget {
   const CategoryGridItem({
     super.key,
     required this.category,
@@ -16,12 +17,14 @@ class CategoryGridItem extends StatelessWidget {
 
   //context is not available in the constructor, so we need to pass it to the method
   //this method is called when the user taps on the category item
-  void _onSelectCategory(BuildContext context, Category category) {
+  void _onSelectCategory(
+    BuildContext context,
+    Category category,
+    List<Meal> meals,
+  ) {
     //filter the meals based on the selected category
     final filterdMeals =
-        dummyMeals
-            .where((meal) => meal.categories.contains(category.id))
-            .toList();
+        meals.where((meal) => meal.categories.contains(category.id)).toList();
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -36,9 +39,10 @@ class CategoryGridItem extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final meals = ref.watch(mealProvider);
     return InkWell(
-      onTap: () => _onSelectCategory(context, category),
+      onTap: () => _onSelectCategory(context, category, meals),
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(16),
       child: Container(
