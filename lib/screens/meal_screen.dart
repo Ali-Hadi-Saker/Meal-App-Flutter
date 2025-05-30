@@ -7,13 +7,10 @@ class MealScreen extends StatelessWidget {
     super.key,
     required this.meals,
     this.title,
-    required this.toggleFavoriteMeal,
   });
 
   final String? title;
   final List<Meal> meals;
-  final Function(Meal meal) toggleFavoriteMeal;
-
   @override
   Widget build(BuildContext context) {
     Widget content = Center(
@@ -40,7 +37,6 @@ class MealScreen extends StatelessWidget {
             // ),
             MealItem(
               meal: meals[index],
-              toggleFavoriteMeal: toggleFavoriteMeal,
             ),
       );
     }

@@ -6,13 +6,15 @@ class FavoriteMealsNotifier extends StateNotifier<List<Meal>> {
   FavoriteMealsNotifier() : super([]);
 
   //state hold the data value
-  void toggleFavoriteMealStatus(Meal meal) {
+  bool toggleFavoriteMealStatus(Meal meal) {
     final isMealExist = state.contains(meal);
 
     if (isMealExist) {
       state = state.where((m) => m.id != meal.id).toList();
+      return false;
     } else {
       state = [...state, meal];
+      return true;
     }
   }
 }
@@ -20,7 +22,7 @@ class FavoriteMealsNotifier extends StateNotifier<List<Meal>> {
 //initialize StateNotifierProvider object
 //StateNotifierProvider need a Notifier class to work with
 final favoriteMealsProvider =
-    //StateNotifierProvider has two generic types, first is the Notifier class and second is the data type that the Notifier will hold
-    StateNotifierProvider<FavoriteMealsNotifier, List<Meal>>((ref) {
-      return FavoriteMealsNotifier();
-    });
+//StateNotifierProvider has two generic types, first is the Notifier class and second is the data type that the Notifier will hold
+StateNotifierProvider<FavoriteMealsNotifier, List<Meal>>((ref) {
+  return FavoriteMealsNotifier();
+});

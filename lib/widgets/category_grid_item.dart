@@ -9,11 +9,9 @@ class CategoryGridItem extends ConsumerWidget {
   const CategoryGridItem({
     super.key,
     required this.category,
-    required this.toggleFavoriteMeal,
   });
 
   final Category category;
-  final Function(Meal meal) toggleFavoriteMeal;
 
   //context is not available in the constructor, so we need to pass it to the method
   //this method is called when the user taps on the category item
@@ -32,7 +30,6 @@ class CategoryGridItem extends ConsumerWidget {
             (ctx) => MealScreen(
               meals: filterdMeals,
               title: category.title,
-              toggleFavoriteMeal: toggleFavoriteMeal,
             ),
       ),
     );

@@ -8,10 +8,8 @@ class MealItem extends StatelessWidget {
   const MealItem({
     super.key,
     required this.meal,
-    required this.toggleFavoriteMeal,
   });
 
-  final Function(Meal meal) toggleFavoriteMeal;
 
   final Meal meal;
 
@@ -21,7 +19,6 @@ class MealItem extends StatelessWidget {
         builder:
             (ctx) => DetailMealScreen(
               meal: meal,
-              toggleFavoriteMeal: toggleFavoriteMeal,
             ),
       ),
     );
